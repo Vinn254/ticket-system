@@ -36,9 +36,14 @@ app.use('/api/tickets', ticketRoutes);
 // Health check
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
-// Serve static files and handle SPA routing
+/// Serve frontend (React/Vue/Angular build)
 app.use(express.static(path.join(__dirname, 'public')));
-res.sendFile(path.join(__dirname, 'public', 'index.html'));
+
+// SPA fallback route - MUST wrap res.sendFile inside a route handler
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 
 
 // 404 + error handler
