@@ -39,7 +39,6 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 // Serve static files and handle SPA routing
 app.use(express.static(path.join(__dirname, 'public')));
 res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
 
 
 // 404 + error handler
